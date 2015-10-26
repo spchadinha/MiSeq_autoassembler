@@ -1,0 +1,36 @@
+# rip     : analysis_params.rip
+# purpose : runtime input parameters for de novo sequence assembly by denovo_analysis.sh
+# revised : YYYY-MM-DDThh:mm:ss
+# author  : Spencer Chadinha
+# notes   : Each line below is a "name-value-pair" meaning each contains (3) elements 
+#           -- 1) a KEYWORD  followed by a 2) DELIMITER, followed by (3), a VALUE
+# 
+
+# All subdirectory entries are appended to the current working directory.
+
+
+# Input which MiSeq run the file was apart of
+PATHNAME MiSeqRun1
+
+# Input the name of the files you would like to analyze 
+FILE1 BeH472201_S5_L001_R1_001.fastq.gz
+FILE2 BeH472201_S5_L001_R2_001.fastq.gz
+
+# Input the length of the sequence you would like after trimming
+LEN 150
+
+# Input the minimum quality score you would like for each sequence
+QUAL 20
+
+# Input the number of samples you would like to take from each run
+# To run generate multiple extractions of varying number of reads, separate desired read lengths by '-'
+#     eg. 10000-20000-30000
+NUMREAD 15000
+
+# Input the k-mer length you would like velvet to start at
+KSTART 31
+
+# Input the k-mer length you would like velvet to end at
+KEND 41
+
+# done

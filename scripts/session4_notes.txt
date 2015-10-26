@@ -1,0 +1,56 @@
+# session 4 commands
+
+copy reads to directory
+
+# fastqc - show in helix
+
+
+
+# trimming  length 150 qual 30
+mkdir trimmed_rd1
+python ~/session4_read_qual_trimming_velvet/process_illumina_PE_wqual.py ../BeH472201_S5_L001_R1_001.fastq ../BeH472201_S5_L001_R2_001.fastq BeH472201_len150_q20_R1.fastq BeH472201_len150_q20_R2.fastq
+
+# random reads 
+1.  random reads for 100X coverage
+python ~/session4_read_qual_trimming_velvet/extract_random_PE_reads.py BeH472201_len150_q20_R1.fastq BeH472201_len150_q20_R2.fastq BeH472201_len150_q20_R1_10k.fastq BeH472201_len150_q20_R2_10k.fastq
+
+
+
+2. interleave for velvet - do in helix
+#python ~/python_scripts/shuffle_seqs_fastq.py BeH472201_len150_q20_R1_10k.fastq BeH472201_len150_q20_R2_10k.fastq BeH472201_len150_q20_10k.fastq
+python ~/session4_read_qual_trimming_velvet/shuffle_seqs_fastq.py ../BeH472201_len150_q20_R1_10k.fastq ../BeH472201_len150_q20_R2_10k.fastq BeH472201_len150_q20_10k.fastq
+
+
+3. velvet run script - range of kmers
+./velvet_script.sh
+
+4.  assemstats.py - currently in helix only  -needs screed
+python ~/python_scripts/assemstats3.py 200 eh_01_BeH472201.*/contigs.fa
+python ~/session4_read_qual_trimming_velvet/assemstats3.py 200 eh_01_BeH472201.*/contigs.fa
+
+5. blast some  - is on helix
+
+6.   transfer contigs  to desktop load in geneious
+
+
+# Bowtie
+
+# in bowtie_data dir/reference
+1. bowtie2-build
+bowtie2-build BeAn19991.fa BeAn19991
+
+2. align: in bowtie_data
+bowtie2 -x ./reference/BeAn19991 -1 ../BeH472201_len150_q20_R1_10k.fastq -2 ../BeH472201_len150_q20_R2_10k.fastq -S BeH472201_len150_q20.sam
+
+3. samtools to convert sam to bam
+samtools view -bS BeH472201_len150_q20.sam -o BeH472201_len150_q20.bam
+
+4. Sort
+samtools sort BeH472201_len150_q20.bam BeH472201_len150_q20.bam.sorted
+
+5. transfer to desktop and put in geneious
+
+
+
+
+
